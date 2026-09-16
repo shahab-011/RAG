@@ -1,0 +1,75 @@
+# ================================
+# LLM / Groq
+# ================================
+groq
+langchain-groq
+
+# ================================
+# LangChain / RAG
+# ================================
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# ================================
+# Embeddings
+# ================================
+sentence-transformers
+transformers
+torch
+
+# ================================
+# Vector Database
+# ================================
+chromadb
+langchain-chroma
+
+# ================================
+# Document Loaders
+# ================================
+pypdf
+python-docx
+openpyxl
+pandas
+
+# ================================
+# Web / API Backend
+# ================================
+fastapi
+uvicorn[standard]
+python-multipart
+
+# ================================
+# Environment Variables
+# ================================
+python-dotenv
+
+# ================================
+# HTTP / API Utilities
+# ================================
+requests
+httpx
+
+# ================================
+# Data Validation
+# ================================
+pydantic
+pydantic-settings
+
+# ================================
+# Useful RAG Utilities
+# ================================
+numpy
+tiktoken
+
+# ================================
+# Optional: Web Search / HTML
+# ================================
+beautifulsoup4
+lxml
+
+# ================================
+# Development / Debugging
+# ================================
+rich

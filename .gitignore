@@ -1,0 +1,20 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local model and vector-store artifacts
+chroma/
+chroma_db/
+*.faiss
+*.pkl
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
