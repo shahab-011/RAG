@@ -1,39 +1,145 @@
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_chroma import Chroma
+load_dotenv()
 
-
-load_dotenv()  # Load environment variables from .env file 
-
-# PDF loader
-data = PyPDFLoader("document loader/deep-learning.pdf")
-docs = data.load()
-
-
-# Split the document into chunks
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=200
-)
-chunks = splitter.split_documents(docs)
-
-
-# Prompt template for the chat model
-template = chat_prompt_template = ChatPromptTemplate.from_messages(
-    [("system", "You are a helpful assistant."), ("human", "{data}")]
+# 1. Load embeddings model and vectorstore
+embeddings_model = GoogleGenerativeAIEmbeddings(
+    model="gemini-embedding-001"
 )
 
 
-model = ChatGroq(
+
+# 2. Load Chroma vectorstore
+vectorstore = Chroma(
+    persist_directory="chroma_db",
+    embedding_function=embeddings_model
+)
+
+
+
+# 3. Create retriever from vectorstore
+retriever = vectorstore.as_retriever(
+    search_type="mmr",
+    search_kwargs={
+        "k": 3,
+        "fetch_k": 10,
+        "lambda_mult": 0.5
+    }
+)
+
+
+# 4. Create ChatGroq model for RAG
+llm = ChatGroq(
     model="openai/gpt-oss-20b",
     temperature=0,
     max_tokens=1024,
 )
 
+   
 
-# Send one chunk to the model for testing
-prompt = template.format_messages(data=chunks[0].page_content)
-res=model.invoke(prompt)
-print(res.content)
+# 5. Create prompt template for RAG
+prompt = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        """You are a helpful assistant.
+
+Use only the provided context to answer the question.
+
+If the answer is not present in the context, say:
+"I could not find the answer in the document."
+"""
+    ),
+    (
+        "human",
+        """Context:
+{context}
+
+Question:
+{question}"""
+    )
+])
+
+print("Rag system is created successfully")
+
+
+# 6. Start the RAG loop for user queries
+print("Press 0 to exit :")
+
+while True:
+    query = input("You: ")
+    if query == "0":
+        break
+    
+     # Retrieve relevant documents
+    docs = retriever.invoke(query)
+
+    # Combine retrieved chunks into a single context
+    context = "\n\n".join([doc.page_content for doc in docs])
+
+
+    # Create final prompt
+    final_prompt = prompt.invoke({
+        "context": context,
+        "question": query
+    })
+
+    # Send to Groq
+    response = llm.invoke(final_prompt)
+    print("\nAI: ", response.content)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Prompt template for the chat model
+# template = chat_prompt_template = ChatPromptTemplate.from_messages(
+#     [("system", "You are a helpful assistant."), ("human", "{data}")]
+# )
+
+
+# model = ChatGroq(
+#     model="openai/gpt-oss-20b",
+#     temperature=0,
+#     max_tokens=1024,
+# )
+
+
+# # Send one chunk to the model for testing
+# prompt = template.format_messages(data=chunks[0].page_content)
+# res=model.invoke(prompt)
+# print(res.content)
