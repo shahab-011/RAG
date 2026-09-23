@@ -1,0 +1,19 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="CourseMate AI icon">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#dbeafe" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="52" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="94" fill="rgba(255,255,255,0.10)"/>
+  <path d="M88 74h48c18 0 33 15 33 33v75c0 10-8 18-18 18H88c-18 0-32-14-32-32V92c0-10 8-18 18-18zm48 0v96h22c7 0 12-5 12-12V107c0-7-5-12-12-12h-22zm-30 20v74c0 5 4 9 9 9h38V94h-38c-5 0-9 4-9 9z" fill="url(#glow)"/>
+  <path d="M101 109c11-8 20-12 31-12 10 0 19 3 27 8l-8 13c-6-4-12-6-19-6-9 0-18 4-28 12l-3-15zm-10 48c9-9 20-14 32-14 12 0 23 5 33 15l-9 12c-8-7-16-10-25-10-9 0-17 3-25 10l-6-13z" fill="#0f172a" opacity="0.88"/>
+  <path d="M175 86l21 21-21 21v-42z" fill="#67e8f9" opacity="0.85"/>
+  <circle cx="184" cy="82" r="8" fill="#f8fafc" opacity="0.9"/>
+</svg>
