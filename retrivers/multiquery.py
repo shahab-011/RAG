@@ -1,7 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_community.vectorstores import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+from embeddings import LocalHuggingFaceEmbeddings
 from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langchain_core.documents import Document
 load_dotenv()
@@ -17,7 +20,7 @@ docs = [
 ]
 
 #  2. Create embeddings
-embeddings = HuggingFaceEmbeddings(
+embeddings = LocalHuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 

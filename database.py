@@ -6,7 +6,7 @@
 from dotenv import load_dotenv
 from pypdf import PdfReader
 from langchain_core.documents import Document
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from embeddings import LocalHuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
 load_dotenv()
@@ -22,7 +22,7 @@ reader = PdfReader(pdf_path)
 
 docs = []
 
-for page_number, page in enumerate(reader.pages[:30]):
+for page_number, page in enumerate(reader.pages):
 
     text = page.extract_text()
 
@@ -87,18 +87,16 @@ for doc in docs:
 print("Number of chunks:", len(chunks))
 
 # --------------------------------
-# 3. Gemini Embeddings
+# 3. Hugging Face Embeddings
 # --------------------------------
 
-embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-001"
+embeddings = LocalHuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
 # --------------------------------
 # 4. Store in ChromaDB in batches
 # --------------------------------
-
-import time
 
 vectorstore = Chroma(
     collection_name="deep_learning",
@@ -119,7 +117,5 @@ for i in range(0, len(chunks), batch_size):
     )
 
     vectorstore.add_documents(batch)
-
-    time.sleep(2)
 
 print("Documents successfully stored in ChromaDB!")
