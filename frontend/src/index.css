@@ -1,11 +1,11 @@
 :root {
   --bg-base: #050608;
   --bg-deep: #0a0c12;
-  --bg-card: rgba(16, 18, 26, 0.55);
-  --bg-card-hover: rgba(24, 27, 38, 0.7);
-  --bg-glass: rgba(12, 14, 20, 0.6);
+  --bg-card: rgba(10, 14, 22, 0.18);
+  --bg-card-hover: rgba(15, 19, 28, 0.28);
+  --bg-glass: rgba(13, 18, 28, 0.2);
 
-  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.09);
   --border-glow: rgba(129, 140, 248, 0.4);
 
   --accent-indigo: #6366f1;
@@ -37,7 +37,10 @@ html, body {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-base);
+  background:
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.15), transparent 30%),
+    var(--bg-base);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -57,11 +60,13 @@ a, button, input, label, [role="button"] {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(129, 140, 248, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(129, 140, 248, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    linear-gradient(rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(99, 102, 241, 0.12), transparent 60%);
+  background-size: 42px 42px, 42px 42px, 100% 100%;
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 82%);
+  opacity: 0.95;
 }
 
 .bg-grid-fine {
@@ -70,9 +75,10 @@ a, button, input, label, [role="button"] {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 12px 12px;
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 14px 14px;
+  opacity: 0.8;
 }
 
 /* Floating orbs */
@@ -120,12 +126,12 @@ a, button, input, label, [role="button"] {
 
 /* ===== Glass Panel ===== */
 .glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  border: 1px solid var(--border-color);
+  background: rgba(12, 16, 25, 0.12);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 14px 35px rgba(2, 6, 23, 0.18), inset 0 1px 0 rgba(255,255,255,0.04);
   position: relative;
   overflow: hidden;
 }
@@ -135,13 +141,9 @@ a, button, input, label, [role="button"] {
   position: absolute;
   inset: 0;
   border-radius: 18px;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(129, 140, 248, 0.3), transparent 40%, transparent 60%, rgba(34, 211, 238, 0.15));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 35%, transparent 65%, rgba(99, 102, 241, 0.06));
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* ===== Gradient Text ===== */

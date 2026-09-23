@@ -516,8 +516,8 @@ export default function App() {
             >
               About
             </button>
-            <span className="badge badge-model">
-              <Cpu size={12} /> Local HF Embeddings
+            <span className="badge badge-model" title="Uses sentence-transformers/all-MiniLM-L6-v2 locally">
+              <Cpu size={12} /> all-MiniLM-L6-v2
             </span>
             <span className="badge badge-free">
               <Zap size={12} /> 0 API Costs
@@ -635,9 +635,17 @@ export default function App() {
                       </div>
                       <h2 className="welcome-title">Ask Anything About Your Documents</h2>
                       <p className="welcome-subtitle">
-                        Upload your study materials on the left. The AI reads them using local
-                        Hugging Face embeddings and answers with page-level citations.
+                        Upload your study materials on the left. The AI reads them using the local
+                        sentence-transformers/all-MiniLM-L6-v2 embedding model and answers with
+                        page-level citations.
                       </p>
+
+                      <div className="model-note-home">
+                        <strong>Local embedding model:</strong> sentence-transformers/all-MiniLM-L6-v2
+                        <br />
+                        This model is downloaded locally on first run and may take a few minutes on a
+                        machine without the cache already installed.
+                      </div>
 
                       <div className="suggestions-grid">
                         {[
